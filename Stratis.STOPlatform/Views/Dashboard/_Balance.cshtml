@@ -1,0 +1,17 @@
+﻿@model (Decimal balance, string ticker)
+@{
+    var (balance, ticker) = Model;
+    var integral = (int)balance;
+    var fraction = Math.Round(balance % 1.0M, 2);
+
+    var fractionFormatted = fraction.ToString().Replace("0.", string.Empty);
+    if (fraction >= 1M)
+    {
+        integral++;
+        fraction = 0;
+    }
+}
+<span class="balance tooltipped" data-position="top" data-tooltip="@balance.ToString(AppConstants.DecimalAtMost8DigitFormat)">
+    <span class="integral">@integral</span>.<span class="fraction">@fractionFormatted</span>
+    <span class='ticker'>@ticker</span>
+</span>

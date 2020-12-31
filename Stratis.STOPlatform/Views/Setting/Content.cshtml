@@ -1,0 +1,68 @@
+﻿@model ContentViewModel
+@{
+    ViewData["Title"] = "Manage Content";
+}
+<div class="feature-section">
+    <div class="container">
+        <partial name="_AlertMessage" />
+        <form method="post" enctype="multipart/form-data">
+            <div class="card z-depth-4">
+                <div class="card-content">
+                    <div class="card-title">
+                        <i class="material-icons">brush</i>@ViewData["Title"]
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea asp-for="PageCover" autocomplete="off" class="materialize-textarea"></textarea>
+                            <label asp-for="PageCover"></label>
+                            <span asp-validation-for="PageCover"></span>
+                        </div>
+                        <div class="input-field col s12">
+                            <input asp-for="Slogan" autocomplete="off" />
+                            <label asp-for="Slogan"></label>
+                            <span asp-validation-for="Slogan"></span>
+                        </div>
+                        <div class="file-field input-field col s12">
+                            <input type="hidden" asp-for="LogoSrc" />
+                            <div class="btn brand-color waves-effect">
+                                <span>Logo Image</span>
+                                <input type="file" asp-for="LogoImage" accept="image/*" />
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" />
+                            </div>
+                            <p class="help-block">Ideally the logo should not be bigger than 480x480 px size</p>
+                        </div>
+                        <div class="file-field input-field col s12">
+                            <input type="hidden" asp-for="BackgroundSrc" />
+                            <div class="btn brand-color waves-effect">
+                                <span>Background Image</span>
+                                <input type="file" asp-for="BackgroundImage" accept="image/*" />
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" />
+                            </div>
+                            <p class="help-block">Ideally the logo should not be bigger than 1920x300 px size</p>
+                        </div>
+                        <div class="file-field input-field col s12">
+                            <input type="hidden" asp-for="LoginBackgroundSrc" />
+                            <div class="btn brand-color waves-effect">
+                                <span>Login Page Background Image</span>
+                                <input type="file" asp-for="LoginBackgroundImage" accept="image/*" />
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" />
+                            </div>
+                            <p class="help-block">Ideally the logo should not be bigger than 1920x1024 px size</p>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea asp-for="CssStyle" class="materialize-textarea"></textarea>
+                            <label asp-for="CssStyle"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn brand-color waves-effect">Save Changes</button>
+        </form>
+    </div>
+</div>

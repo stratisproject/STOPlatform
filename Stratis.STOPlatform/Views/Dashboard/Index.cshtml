@@ -1,0 +1,156 @@
+﻿@model DashboardIndexViewModel
+@using Stratis.STOPlatform.Core.Extensions
+@inject AppSetting setting
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@section styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/dashboard-index.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/dashboard-index.min.css" asp-append-version="true" />
+    </environment>
+}
+
+@section scripts{
+    <environment include="Development">
+        <script src="~/lib/knockout/knockout-latest.debug.js"></script>
+        <script src="~/js/dashboard-index.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/knockout/knockout-latest.min.js"></script>
+        <script src="~/js/dashboard-index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<div class="dashboard-page">
+    <div class="feature-section">
+        <div class="container">
+            <partial name="_AlertMessage" />
+            <h5 class="header">YOUR <span class="brand-color-text">CONTRIBUTIONS</span></h5>
+            @if (Model.ShowTotalContribution)
+            {
+                <partial name="_TotalContributions" model="(Model.TotalContribution,Model.CirrusInfo.TokenName)" />
+            }
+            @{var coinInfo = Model.Contribution.CoinInfo; }
+            <div class="card z-depth-4">
+                <div class="card-content">
+                    <div class="card-title">
+                        <i class="icon-crypto-logo-stratis-o">&nbsp;</i>CONTRIBUTE WITH CIRRUS
+                    </div>
+                    <div class="left-offset">
+                        <div>
+                            <div class="sm-title">Your contribution address</div>
+                            @if (Model.STOFinished)
+                            {
+                                <div class="row">
+                                    <div class="valign-wrapper padding-top-10 left">
+                                        <i class="material-icons left white-text red-block-icon">block</i>
+                                        <span class="grey-text semi-bold">The crowdfund has ended.</span>
+                                    </div>
+                                    <a class="brand-color-text waves-effect btn-flat right card-text" target="_blank" href="@coinInfo.AddressExploreLink(Model.Contribution.Address)">Explore</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="wallet-address">@Model.Contribution.Address</span>
+                                <span class="right">
+                                    <a class="brand-color-text waves-effect btn-flat card-text" target="_blank" href="@coinInfo.AddressExploreLink(Model.Contribution.Address)">Explore</a>
+                                    <a class="brand-color-text waves-effect btn-flat card-text" data-bind="click: copyAddress.bind($data,'@Model.Contribution.Address')">Copy</a>
+                                </span>
+                            }
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="sm-title">You have contributed</div>
+                                <partial name="_Balance" model="(Model.Contribution.Balance, Model.Contribution.CoinInfo.TokenName)" />
+                            </div>
+                            <div class="col s6">
+                                <div class="sm-title">You have earned</div>
+                                <div class="brand-color-text">
+                                    <span class="balance">
+                                        <span class="integral">@Model.Contribution.EarnedTokens.ToString(AppConstants.NumberFormat)</span>
+                                        <span class='ticker'>@Model.TokenName</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card z-depth-4">
+                <div class="card-content">
+                    <div class="card-title">
+                        <i class="material-icons">format_list_bulleted</i>TRANSACTION DETAILS
+                    </div>
+                    <table class="responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction</th>
+                                <th>Invested</th>
+                                <th>Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var deposit in Model.Deposits)
+                            {
+                                coinInfo = Model.CirrusInfo;
+                                <tr>
+                                    <td class="id text-overflow">
+                                        <a href="@coinInfo.TransactionLink(deposit.TransactionId)" target="_blank">@deposit.TransactionId</a>
+                                    </td>
+                                    <td>
+                                        <span class="tooltipped" data-position="top" data-tooltip="@deposit.Invested.ToString(AppConstants.DecimalAtMost8DigitFormat)">
+                                            <span>
+                                                @deposit.Invested.ToString(AppConstants.DecimalAtMost2DigitFormat)
+                                                @coinInfo.TokenName
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            @deposit.EarnedToken.ToString(AppConstants.NumberFormat)
+                                            @Model.TokenName
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+
+                            @if (!Model.Deposits.Any())
+                            {
+                                <tr>
+                                    <td class="grey-text" colspan="3">You don't have any investment yet.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card z-depth-4 black total-reward">
+                <div class="card-content">
+                    <div class="card-title white-text">
+                        <i class="material-icons brand-color-text">grade</i>YOUR TOTAL REWARDS
+                    </div>
+                    <div class="left-offset">
+                        <div class="col s12 m10 offset-m1 l10 offset-l1">
+                            <div class="no-margins">
+                                <div class="brand-color-text card-text">Your contribution have earned a total of</div>
+                                <span class="white-text">
+                                    <span class="balance">
+                                        <span class="integral">@Model.Contribution.EarnedTokens.ToString(AppConstants.NumberFormat)</span>
+                                        <span class='ticker'>@Model.TokenName</span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

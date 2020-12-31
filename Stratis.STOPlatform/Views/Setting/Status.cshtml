@@ -1,0 +1,26 @@
+﻿@model StatusModel
+@{
+    ViewData["Title"] = "STO Status";
+}
+<div class="feature-section setting-status">
+    <div class="container">
+        <partial name="_AlertMessage" />
+        <div class="card z-depth-4">
+            <div class="card-content">
+                <div class="card-title">
+                    <i class="material-icons">info</i>@ViewData["Title"]
+                </div>
+                <div class="left-offset">
+                    <div class="contribution">
+                        <span class="label">@Model.CoinInfo.TokenName Contributions:</span>
+                        <span class="amount">
+                            @Model.TotalContribution.ToString(AppConstants.DecimalAtMost2DigitFormat) <span>@Model.CoinInfo.TokenName</span>
+                        </span>
+                    </div>
+                    <a download asp-action="ExportContributions" class="btn brand-color waves-effect"><i class="material-icons left">file_download</i> Export Contributions</a><br /><br />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

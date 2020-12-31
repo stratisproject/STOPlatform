@@ -1,0 +1,339 @@
+﻿/* This file included on base layout so only common css will be here */
+@import "variables";
+
+html {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: @med-grey;
+
+    &, body {
+        height: 100%;
+    }
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.field-validation-error {
+    display: block;
+    margin-top: 5px;
+    color: @error-color;
+}
+
+input[readonly] {
+    color: rgba(0,0,0,0.42);
+    border-bottom: 1px dotted rgba(0,0,0,0.42) !important;
+}
+
+.input-validation-error {
+    &, &:focus {
+        border-bottom: 1px solid @error-border-color !important;
+        color: @error-color !important;
+        box-shadow: 0 1px 0 0 @error-border-color !important;
+    }
+
+    & ~ label {
+        &, &:focus {
+            color: @error-color !important;
+        }
+    }
+}
+
+.white-form {
+    input {
+        color: #ffffff;
+    }
+
+    label {
+        &, &.active {
+            color: #ffffff !important;
+        }
+    }
+}
+
+.error-page {
+    margin-top: 50px;
+
+    h1 {
+        font-size: 40px;
+    }
+}
+
+h4 {
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+}
+
+.feature-section {
+    .header {
+        margin-bottom: 20px;
+        text-align: center;
+        color: @black;
+    }
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: @light-grey;
+}
+
+.card {
+    margin-bottom: 2.625rem;
+
+    .card-content {
+        padding-top: 45px !important;
+        padding-bottom: 60px !important;
+
+        .card-text {
+            font-size: 13px;
+        }
+
+        .sm-title {
+            .card-text();
+            color: #69737d;
+            font-weight: 600;
+        }
+
+        .card-title {
+            margin-bottom: 30px;
+            color: @brand-color;
+
+            i {
+                margin-right: 15px;
+                float: left;
+                font-size: 37px;
+                width: 45px;
+            }
+        }
+
+        .left-offset {
+            @media only screen and (min-width: 601px) {
+                margin: 0 20px 10px 60px;
+            }
+        }
+    }
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.brand-color {
+    background-color: @brand-color !important;
+}
+
+.brand-color-text {
+    color: @brand-color !important;
+
+    &.lighten-1 {
+        color: lighten(@brand-color, 20%) !important;
+    }
+}
+
+.brand-color-box input[type=text]:focus {
+    border-bottom-color: @brand-color !important;
+}
+
+.font-size09 {
+    font-size: 0.937em;
+}
+
+.grey {
+    background-color: @light-grey !important;
+}
+
+.grey-text {
+    color: @dark-grey !important;
+}
+
+.black {
+    background-color: @black !important;
+}
+
+.black-text {
+    color: @black !important;
+}
+
+.sticky-footer-container {
+    min-height: calc(100% - @footer-height - 5px);
+    overflow: auto;
+    background-size: cover;
+}
+
+footer {
+    height: @footer-height;
+
+    .footer-copyright {
+        background-color: lighten(@brand-color, 20%);
+    }
+}
+
+.nav-extended {
+    background-size: cover;
+    min-height: 300px;
+    background-color: @med-grey !important;
+
+    #manage-menu {
+        min-width: 215px;
+    }
+
+    .nav-content {
+        h5, h4 {
+            text-transform: uppercase
+        }
+
+        h5 {
+            font-size: 1.6em;
+        }
+    }
+
+    .ico-logo {
+        max-height: 105px;
+    }
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.brand-logo {
+    font-size: 1rem !important;
+    text-transform: capitalize;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.login-title {
+    font-weight: lighter;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 50px;
+}
+
+.terms-link {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.centered-box {
+    margin: 100px auto 20px;
+    max-width: 500px;
+    width: 100%;
+
+    .box {
+        background-color: rgba(0,0,0,.2);
+        padding: 40px 25px;
+
+        h4 {
+            margin: 0 0 40px;
+            font-weight: 400;
+        }
+    }
+}
+
+.btn {
+    &.btn-block {
+        font-weight: normal;
+        font-size: 15px;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+.red-block-icon {
+    background-color: red;
+    border-radius: 15px;
+    padding: 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.semi-bold {
+    font-weight: 600;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.padding-top-10 {
+    padding-top: 10px !important;
+}
+
+.padding-top-30 {
+    padding-top: 30px !important;
+}
+
+.media-heading {
+    font-size: 1.25em;
+}
+
+@media only screen and (max-width: 600px) {
+    .login div.card {
+        padding-top: 15px;
+        padding-bottom: 5px;
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+    }
+
+    .register {
+        margin-top: 15px;
+    }
+
+    .register-title {
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .btn-flat {
+        line-height: inherit;
+    }
+
+    .media-heading {
+        font-size: 1.5em;
+    }
+}
+
+/*status page*/
+.setting-status {
+    .contribution {
+        .label {
+            .semi-bold;
+            display: inline-block;
+            width: 170px;
+            margin-bottom: 5px;
+        }
+
+        .amount {
+            .brand-color-text;
+            .text-bold;
+        }
+    }
+
+    a.btn {
+        margin-top: 20px;
+    }
+}
+
+/*status page*/

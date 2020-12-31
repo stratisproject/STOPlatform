@@ -1,0 +1,61 @@
+﻿@import "variables";
+
+.dashboard-page {
+
+    .wallet-address {
+        font-weight: bold;
+    }
+
+    .transactions {
+        th, td {
+            padding: 15px;
+            border-radius: 0;
+        }
+    }
+
+    .balance {
+        font-weight: bold;
+
+        .integral {
+            font-size: 26px;
+        }
+
+        .fraction {
+            font-size: 24px;
+        }
+
+        .ticker {
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+
+    .card {
+        .card-content {
+            .divider {
+                height: 1px;
+                width: 100%;
+                color: #eee;
+                margin: 40px 0;
+            }
+
+            .right a.btn-flat {
+                text-transform: capitalize;
+                text-decoration: underline;
+            }
+        }
+
+        &.total-reward {
+            .card-content {
+                padding: 24px !important;
+            }
+        }
+    }
+
+    .agree {
+        display: block;
+        font-size: 16px;
+        line-height: 34px;
+        padding-right: 20px;
+    }
+}

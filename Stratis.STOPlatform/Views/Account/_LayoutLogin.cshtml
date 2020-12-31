@@ -1,0 +1,26 @@
+﻿@inject Stratis.STOPlatform.Data.ApplicationDbContext db
+@using Stratis.STOPlatform.Data.Docs;
+
+@{
+    Layout = "_LayoutBase";
+    var stoSetting = await db.Documents.GetAsync<STOSetting>();
+}
+
+@section Head{
+    @RenderSection("Head", required: false)
+}
+
+@section Styles {
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+
+}
+
+@section Scripts{
+    @RenderSection("scripts", required: false)
+}
+
+<div class="sticky-footer-container" style="background-image: url(@stoSetting.LoginBackgroundSrc);">
+    @RenderBody()
+</div>
+<partial name="_Footer" />

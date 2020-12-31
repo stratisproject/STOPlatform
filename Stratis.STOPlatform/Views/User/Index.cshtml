@@ -1,0 +1,35 @@
+﻿@model IPagedList<UserViewModel>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="feature-section">
+    <div class="container">
+        <partial name="_AlertMessage" />
+        <div class="card z-depth-4">
+            <div class="card-content">
+                <div class="card-title">
+                    <i class="material-icons">account_box</i>Users
+                </div>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.FullName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <partial name="paging" model="Model" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

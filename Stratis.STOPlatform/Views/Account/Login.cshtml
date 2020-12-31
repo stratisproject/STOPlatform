@@ -1,0 +1,33 @@
+﻿@model STOSetting
+@{
+    ViewData["Title"] = "Log in";
+}
+
+@section styles{
+    <link href="~/css/account-login.min.css" rel="stylesheet" />
+}
+<div class="account-login section">
+    <div class="top-space show-on-extra-large"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col m12 l10 offset-l1">
+                <partial name="_AlertMessage" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12 l5 offset-l1 intro">
+                <div class="space show-on-extra-large"></div>
+                <h1 class="text-left intro-title center-on-small-only">Welcome to the @Model.Name</h1>
+                <p class="text-left white-text">
+                    @Model.PageCover
+                </p>
+            </div>
+            <div class="col m12 l5 login">
+                <div class="card">
+                    <p class="login-title">Sign In</p>
+                    <a asp-action="Index" asp-controller="Dashboard" class="btn waves-effect waves-light brand-color btn-block">SIGN ME BY STRATIS IDENTITY</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

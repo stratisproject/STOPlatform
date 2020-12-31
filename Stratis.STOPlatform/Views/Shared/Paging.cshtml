@@ -1,0 +1,32 @@
+﻿@using X.PagedList
+@model IPagedList
+
+<ul class="pagination">
+    @if (Model.HasPreviousPage)
+    {
+        <li>
+            <a class="no-padding" href="?page=1"><i class="material-icons">skip_previous</i></a>
+        </li>
+        <li>
+            <a class="no-padding" href="?page=@(Model.PageNumber - 1)"><i class="material-icons">navigate_before</i></a>
+        </li>
+    }
+
+    @for (var pageNumber = 1; pageNumber <= Model.PageCount; pageNumber++)
+    {
+        <li class="@(pageNumber == Model.PageNumber ? "active" : "waves-effect")">
+            <a href="?page=@pageNumber">@pageNumber</a>
+        </li>
+    }
+
+    @if (Model.HasNextPage)
+    {
+        <li>
+            <a class="no-padding" href="?page=@(Model.PageNumber + 1)"><i class="material-icons">navigate_next</i></a>
+        </li>
+        <li>
+            <a class="no-padding" href="?page=@(Model.PageCount)"><i class="material-icons">skip_next</i></a>
+        </li>
+    }
+</ul>
+

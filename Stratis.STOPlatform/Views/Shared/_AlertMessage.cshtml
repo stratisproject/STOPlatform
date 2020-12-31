@@ -1,0 +1,34 @@
+﻿@using Newtonsoft.Json;
+@using Stratis.STOPlatform.Models
+@{
+    var tempData = ViewContext.TempData;
+    var message = (AlertMessage)null;
+    if (tempData.TryGetValue(AppConstants.AlertMessageKey, out object alertMessage))
+    {
+        message = JsonConvert.DeserializeObject<AlertMessage>((string)alertMessage);
+    }
+    var errors = ViewData.ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage).ToList();
+}
+
+@if (message != null)
+{
+    <div class="card-panel @message.ClassValue">
+        <i class="material-icons left">@message.Icon</i> <strong>@message.Title</strong> @Html.Raw(message.Message)
+    </div>
+}
+else if (errors.Any())
+{
+    <div class="card-panel red white-text">
+        @if (errors.Count == 1)
+        {
+        <i class="material-icons left">error</i> @errors[0]
+        }
+        else
+        {
+            foreach (var error in errors)
+            {
+                <div>@error</div>
+            }
+        }
+    </div>
+}

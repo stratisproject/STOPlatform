@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/css/site.less"
+  },
+  {
+    "outputFile": "wwwroot/css/dashboard-index.css",
+    "inputFile": "wwwroot/css/dashboard-index.less"
+  },
+  {
+    "outputFile": "wwwroot/css/account-login.css",
+    "inputFile": "wwwroot/css/account-login.less"
+  },
+  {
+    "outputFile": "wwwroot/css/setting-edit.css",
+    "inputFile": "wwwroot/css/setting-edit.less"
+  }
+]

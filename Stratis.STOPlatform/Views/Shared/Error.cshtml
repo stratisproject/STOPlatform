@@ -1,0 +1,23 @@
+﻿@model ErrorViewModel
+@{
+    Layout = "_Layoutbase";
+    ViewData["Title"] = "Error";
+}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card red lighten-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Unexpected Server Error</span>
+                    <p>
+                        The server encountered something unexpected that didn't allow it to complete the request. We apologize.
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="@Model.ContactEmailLink"> Contact Us</a>
+                    <a class="btn" asp-action="index" asp-controller="Dashboard"> Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

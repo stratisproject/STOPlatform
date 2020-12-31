@@ -1,0 +1,48 @@
+﻿@model SetupStep1ViewModel
+@{
+    ViewData["Title"] = "Setup Page";
+    Layout = "_LayoutBase";
+}
+
+@section scripts{
+    <script>
+        var data = @Html.Json(Model);
+    </script>
+    <environment include="Development">
+        <script src="~/lib/knockout/knockout-latest.debug.js"></script>
+        <script src="~/js/setup-step-1.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/knockout/knockout-latest.min.js"></script>
+        <script src="~/js/setup-step-1.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<div class="setup-edit">
+    <div class="feature-section">
+        <h5 class="header">Disclaimer Agreement - <span class="brand-color-text">Step 1</span></h5>
+        <div class="container">
+            <partial name="_AlertMessage" />
+            <form method="post" data-bind="submit:save" autocomplete="off">
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="DisclaimerText" class="materialize-textarea disclaimer" readonly data-bind="event: { scroll: scrollDisclaimer }" style="max-height:500px;overflow-y:scroll"><partial name="_Disclaimer" /></textarea>
+                                <span data-bind="visible:submitAttempted() && !disclaimerValid(), css: { 'field-validation-error' : !disclaimerValid() }">Please scroll and read all</span>
+                            </div>
+                            <div class="col s12">
+                                <label>
+                                    <input type="checkbox" asp-for="DisclaimerAgreement" data-bind="enable: disclaimerRead" data-rule-scrollbottom="true" />
+                                    <span>I agree to the Disclaimer Conditions</span>
+                                </label>
+                                <span asp-validation-for="DisclaimerAgreement"></span>
+                                <input type="hidden" asp-for="True" value="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn brand-color waves-effect">Agree And Next</button>
+            </form>
+        </div>
+    </div>
+</div>

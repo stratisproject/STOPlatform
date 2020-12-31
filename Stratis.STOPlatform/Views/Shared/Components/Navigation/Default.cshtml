@@ -1,0 +1,157 @@
+﻿@model (STOSetting stoSetting,bool isSTOEnded)
+@using Stratis.STOPlatform.Data.Docs;
+@using Stratis.STOPlatform.Controllers;
+@{ 
+    var (stoSetting, isSTOEnded) = Model;
+}
+
+<nav class="nav-extended z-depth-0" style="background-image: url(@stoSetting.BackgroundSrc)" role="navigation">
+    <div class="nav-wrapper container">
+        <a href="@stoSetting.WebsiteUrl" class="brand-logo white-text left hide">
+            <i class="material-icons left brand-color-text lighten-1 back-icon">arrow_back</i>Go Back
+        </a>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul class="right hide-on-med-and-down">
+                <li class="@Html.IsSelected(controller: Utility.ControllerName<DashboardController>(),action:nameof(DashboardController.Index))">
+                    <a href="@Url.DashboardLink()">
+                        <i class="material-icons left">view_module</i> <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                @if (User.IsInRole(AppConstants.AdminRole))
+                {
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="manage-menu" data-constrainWidth="false" data-alignment="bottom">
+                            Management <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                        <ul id="manage-menu" class="dropdown-content" style="min-width:215px;" data-constrainWidth="false">
+                            <li class="@Html.IsSelected(action:nameof(SettingController.Edit), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                <a asp-action="Edit" asp-controller="Setting">
+                                    <i class="material-icons">settings</i> <span class="nav-label">STO Settings</span>
+                                </a>
+                            </li>
+                            <li class="@Html.IsSelected(action:nameof(SettingController.Content), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                <a asp-action="Content" asp-controller="Setting">
+                                    <i class="material-icons center-align">brush</i> <span class="nav-label">Manage Content</span>
+                                </a>
+                            </li>
+                            <li class="@Html.IsSelected(action:nameof(UserController.Index), controller: Utility.ControllerName<UserController>()) brand-color-text">
+                                <a asp-action="Index" asp-controller="User">
+                                    <i class="material-icons center-align">account_circle</i> <span class="nav-label">Users</span>
+                                </a>
+                            </li>
+                            <li class="@Html.IsSelected(action:nameof(SettingController.Status), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                <a asp-action="Status" asp-controller="Setting">
+                                    <i class="material-icons center-align">info</i> <span class="nav-label">STO Status</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a href="mailto:@(stoSetting.ContactEmail)?subject=Feedback">
+                        <i class="material-icons left">mail</i> <span class="nav-label">Contact Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-trigger" href="#!" data-target="user-menu">
+                        @(User.GetFullName() ?? "Welcome!")<i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                    <ul id="user-menu" class="dropdown-content" data-constrainwidth="false">
+                        <li>
+                            <a onclick="document.getElementById('logoutForm').submit()" class="brand-color-text">
+                                <i class="material-icons left">exit_to_app</i> <span class="nav-label">Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    </div>
+    <div class="nav-content container">
+        <div class="row">
+            <div class="col s9 ">
+                @if (isSTOEnded)
+                {
+                    <h5>THE @stoSetting.Name HAS FINISHED</h5>
+                    <p class="col m7">
+                        The @stoSetting.Name token crowdfund has finished successfully. We thank all participants for their contributions.
+                        Details on distribution can be found <a class="white-text terms-link" href="@stoSetting.BlogPostUrl" target="_blank">in our blog post</a>
+                    </p>
+                }
+                else
+                {
+                    <h4>@stoSetting.Slogan</h4>
+                    <span>
+                        @stoSetting.PageCover
+                    </span>
+                }
+            </div>
+            <div class="col s3">
+                <img class="ico-logo responsive-img" src="@stoSetting.LogoSrc" />
+            </div>
+        </div>
+    </div>
+</nav>
+@if (User.Identity.IsAuthenticated)
+{
+    <ul id="nav-mobile" class="sidenav">
+        <li class="@Html.IsSelected(action:nameof(DashboardController.Index), controller: Utility.ControllerName<DashboardController>())">
+            <a asp-controller="Dashboard" asp-action="Index">
+                <i class="material-icons left">view_module</i> <span class="nav-label">Dashboard</span>
+            </a>
+        </li>
+        @if (User.IsInRole(AppConstants.AdminRole))
+        {
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header">Management<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li class="@Html.IsSelected(action:nameof(SettingController.Edit), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                    <a asp-action="Edit" asp-controller="Setting">
+                                        <i class="material-icons left">settings</i> <span class="nav-label">STO Settings</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.IsSelected(action:nameof(SettingController.Content), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                    <a asp-action="Content" asp-controller="Setting">
+                                        <i class="material-icons center-align">brush</i> <span class="nav-label">Manage Content</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.IsSelected(action:nameof(UserController.Index), controller: Utility.ControllerName<UserController>()) brand-color-text">
+                                    <a asp-action="Index" asp-controller="User">
+                                        <i class="material-icons center-align">account_circle</i> <span class="nav-label">Users</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.IsSelected(action:nameof(SettingController.Status), controller: Utility.ControllerName<SettingController>()) brand-color-text">
+                                    <a asp-action="Status" asp-controller="Setting">
+                                        <i class="material-icons center-align">info</i> <span class="nav-label">STO Status</span>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                            </ul>
+                        </div>
+
+                    </li>
+
+                </ul>
+            </li>
+
+        }
+        <li>
+            <a href="mailto:@(stoSetting.ContactEmail)?subject=Feedback">
+                <i class="material-icons left">mail</i> <span class="nav-label">Contact Us</span>
+            </a>
+        </li>
+        <li>
+            <a onclick="document.getElementById('logoutForm').submit()" class="brand-color-text">
+                <i class="material-icons left">exit_to_app</i> <span class="nav-label">Log Out</span>
+            </a>
+        </li>
+    </ul>
+    <form style="display: none;" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm"></form>
+
+}
+

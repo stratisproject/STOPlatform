@@ -1,0 +1,22 @@
+﻿@using Stratis.STOPlatform.Core.Services;
+@model (decimal total, string tokenName)
+@{
+    var (total, tokenName) = Model;
+}
+<div class="card z-depth-4 total-contributions">
+    <div class="card-content">
+        <div class="card-title">
+            <i class="material-icons">info</i>TOTAL COLLECTED
+        </div>
+        <div class="left-offset">
+            <div class="row">
+                <div class="col s12">
+                    <div class="sm-title">@tokenName Contributions</div>
+                    <span class="brand-color-text">
+                        <partial name="_Balance" model="Model" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/setup-step-1.min.js",
+    "inputFiles": [
+      "wwwroot/js/setup-step-1.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/setup-step-2.min.js",
+    "inputFiles": [
+      "wwwroot/js/setup-step-2.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dashboard-index.min.js",
+    "inputFiles": [
+      "wwwroot/js/dashboard-index.js"
+    ]
+  }
+]

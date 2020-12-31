@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_LayoutBase.cshtml";
+}
+
+@section Head{
+    @if (IsSectionDefined("Head"))
+    {
+        @RenderSection("Head", required: false)
+    }
+}
+
+@section Styles {
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+}
+
+<div class="sticky-footer-container">
+    <vc:navigation></vc:navigation>
+    @RenderBody()
+</div>
+<partial name="_Footer" />
+
+@section Scripts{
+    @if (IsSectionDefined("Scripts"))
+    {@RenderSection("Scripts", required: false)}
+}

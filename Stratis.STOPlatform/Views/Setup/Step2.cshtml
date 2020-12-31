@@ -1,0 +1,155 @@
+﻿@model SetupStep2ViewModel
+@{
+    ViewData["Title"] = "Setup Page";
+    Layout = "_LayoutBase";
+}
+
+@section scripts{
+    <script>
+        var data = @Html.Json(Model);
+    </script>
+    <environment include="Development">
+        <script src="~/lib/knockout/knockout-latest.debug.js"></script>
+        <script src="~/js/setup-step-2.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/knockout/knockout-latest.min.js"></script>
+        <script src="~/js/setup-step-2.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<div class="setup-edit">
+    <div class="feature-section">
+        <h5 class="header">Contract Deployment - <span class="brand-color-text">Step 2</span></h5>
+        <div class="container">
+            <partial name="_AlertMessage" />
+            <form method="post" autocomplete="off">
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">settings</i>Token Details
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <label asp-for="TokenType"></label>
+                                <select asp-for="TokenType" asp-items="Html.GetEnumSelectList<TokenType>()" class="browser-default">
+                                    <option selected="selected" value="">Please Select Token</option>
+                                </select>
+                                <span asp-validation-for="TokenType"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="Name" autocomplete="off" />
+                                <label asp-for="Name"></label>
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="Symbol" autocomplete="off" />
+                                <label asp-for="Symbol"></label>
+                                <span asp-validation-for="Symbol"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TotalSupply" autocomplete="off" />
+                                <label asp-for="TotalSupply"></label>
+                                <span asp-validation-for="TotalSupply"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="Owner" autocomplete="off" />
+                                <label asp-for="Owner"></label>
+                                <span asp-validation-for="Owner"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">attach_money</i>Token Sale Periods
+                        </div>
+                        <div class="row">
+                            <div class="bonus-periods">
+                                <div class="col s12">
+                                    <table class="table responsive-table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Token Price As CRS</th>
+                                                <th>Duration As Block Count</th>
+                                                <th class="action"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- ko foreach: periods -->
+                                            <tr>
+                                                <td data-bind="text: $index() + 1"></td>
+                                                <td><input type="number" step="0.001" min="0" data-bind="value:tokenPrice,attr:{ name: 'Periods[' + $index() + '].tokenPrice' }" placeholder="e.g 0.001" /></td>
+                                                <td><input type="number" data-bind="value:duration,attr:{ name: 'Periods[' + $index() + '].duration' }" /></td>
+                                                <td class="center-align"><button type="button" class="btn-small waves-effect waves-light red" data-bind="click:$parent.remove, disable: $index() == 0" title="Remove"><i class="material-icons">cancel</i></button></td>
+                                            </tr>
+                                            <!-- /ko -->
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn brand-color btn-small pull-right clearfix waves-effect waves-light margin-top-15" data-bind="click:add">
+                                        <i class="material-icons left">add_circle_outline</i>
+                                        Add Sale Period
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">local_atm</i>Transaction Details
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <label asp-for="WalletName"></label>
+                                <select asp-for="WalletName" asp-items="@Model.Wallets" class="browser-default" data-bind="value:wallet">
+                                    <option value="">Please Select Wallet</option>
+                                </select>
+                                <span asp-validation-for="WalletName"></span>
+                            </div>
+                            <div class="col s12">
+                                <label asp-for="Sender"></label>
+                                <select asp-for="Sender" class="browser-default" data-bind="options: addresses, optionsText: 'title', optionsValue: 'address', value: sender, optionsCaption: 'Please Select Address', optionsAfterRender:setToBold"></select>
+                                <span asp-validation-for="Sender"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="number" asp-for="FeeAmount" min="0" step="0.001" autocomplete="off" />
+                                <label asp-for="FeeAmount"></label>
+                                <span asp-validation-for="FeeAmount"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="GasPrice" min="0" autocomplete="off" data-min="0" />
+                                <label asp-for="GasPrice"></label>
+                                <span asp-validation-for="GasPrice"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="GasLimit" min="0" autocomplete="off" />
+                                <label asp-for="GasLimit"></label>
+                                <span asp-validation-for="GasLimit"></span>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input asp-for="WalletPassword" autocomplete="off" />
+                                <label asp-for="WalletPassword"></label>
+                                <span asp-validation-for="WalletPassword"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea asp-for="ByteCode" readonly class="materialize-textarea" style="max-height:142px;overflow-y:scroll"></textarea>
+                                <label asp-for="ByteCode"></label>
+                                <div class="helper-text">
+                                    <a href="https://github.com/stratisproject/CirrusSmartContracts/tree/master/Testnet/STOContract" target="_blank">
+                                        Source Code on Github
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn brand-color waves-effect">Deploy Contract And Next</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@using System.Reflection;
+@{
+    var version = Assembly.GetEntryAssembly()
+                            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                            .InformationalVersion;
+}
+<footer>
+    <div class="container black-text">
+        <a class="brand-color-text" href="http://stratisplatform.com" target="_blank">Powered by Stratis</a> © @DateTime.Now.Year (build @version)
+    </div>
+</footer>

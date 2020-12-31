@@ -1,0 +1,99 @@
+﻿@model SettingViewModel
+@{
+    ViewData["Title"] = "Administration Page";
+}
+@section styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/setting-edit.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/setting-edit.min.css" asp-append-version="true" />
+    </environment>
+}
+<div class="admin-edit">
+    <div class="feature-section">
+        <h5 class="header">STO <span class="brand-color-text">SETTINGS</span></h5>
+        <div class="container">
+            <partial name="_AlertMessage" />
+            <form method="post">
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">settings</i>Main Settings
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input asp-for="Name" autocomplete="off" />
+                                <label asp-for="Name"></label>
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                            <div class="input-field col s12" style="display:none;">
+                                <input asp-for="WebsiteUrl" autocomplete="off" />
+                                <label asp-for="WebsiteUrl"></label>
+                                <span asp-validation-for="WebsiteUrl"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="BlogPostUrl" autocomplete="off" />
+                                <label asp-for="BlogPostUrl"></label>
+                                <span asp-validation-for="BlogPostUrl"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TermsAndConditionsUrl" autocomplete="off" />
+                                <label asp-for="TermsAndConditionsUrl"></label>
+                                <span asp-validation-for="TermsAndConditionsUrl"></span>
+                            </div>
+                            <div class="col s12">
+                                <label>
+                                    <input type="checkbox" asp-for="ShowTotalContribution" />
+                                    <span>Show Total Contributions On Dashboard</span>
+                                    <span asp-validation-for="ShowTotalContribution"></span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">info</i>Contract Info
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input asp-for="ContractAddress" readonly />
+                                <label asp-for="ContractAddress"></label>
+                                <span asp-validation-for="ContractAddress"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TokenAddress" readonly />
+                                <label asp-for="TokenAddress"></label>
+                                <span asp-validation-for="TokenAddress"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="OwnerAddress" readonly />
+                                <label asp-for="OwnerAddress"></label>
+                                <span asp-validation-for="OwnerAddress"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TokenName" readonly />
+                                <label asp-for="TokenName"></label>
+                                <span asp-validation-for="TokenName"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="Symbol" readonly />
+                                <label asp-for="Symbol"></label>
+                                <span asp-validation-for="Symbol"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TotalSupply" type="text" readonly />
+                                <label asp-for="TotalSupply"></label>
+                                <span asp-validation-for="TotalSupply"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn brand-color waves-effect">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>

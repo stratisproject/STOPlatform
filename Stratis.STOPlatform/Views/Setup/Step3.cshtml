@@ -1,0 +1,36 @@
+﻿@model SetupStep3ViewModel
+@{
+    ViewData["Title"] = "Setup Page";
+    Layout = "_LayoutBase";
+}
+
+<div class="setup-edit">
+    <div class="feature-section">
+        <h5 class="header">Application Settings - <span class="brand-color-text">Step 3</span></h5>
+        <div class="container">
+            <partial name="_AlertMessage" />
+            <form method="post" data-bind="submit:save" autocomplete="off">
+                <div class="card z-depth-4">
+                    <div class="card-content">
+                        <div class="card-title">
+                            <i class="material-icons">settings</i>Applicaton Settings
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input asp-for="ContactEmail" autocomplete="off" />
+                                <label asp-for="ContactEmail"></label>
+                                <span asp-validation-for="ContactEmail"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input asp-for="TermsAndConditionsUrl" autocomplete="off" />
+                                <label asp-for="TermsAndConditionsUrl"></label>
+                                <span asp-validation-for="TermsAndConditionsUrl"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn brand-color waves-effect">Submit And Done</button>
+            </form>
+        </div>
+    </div>
+</div>
