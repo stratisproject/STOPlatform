@@ -1,5 +1,2 @@
-﻿### add migration script
-add-migration <name> -project Stratis.ICOPlatform.Data -startup Stratis.ICOPlatform
+# Stratis STO Platform
 
-### apply migrations to database
-update-database -project Stratis.ICOPlatform.Data -startup Stratis.ICOPlatform
